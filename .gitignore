@@ -4,7 +4,7 @@ __pycache__/
 *.pyo
 
 # Django
-BackEnd/minimarket/minimarket/settings.py
+BackEnd/minimarket/settings.py
 BackEnd/minimarket/db.sqlite3
 
 # PostgreSQL
