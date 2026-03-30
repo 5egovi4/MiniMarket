@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla de Pago</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="payment-body">
+    <div class="payment-container">
+        <div class="card payment-method">
+            <h2 class="card-title">Selecciona tu método de pago</h2>
+            <div class="payment-option">
+                <input type="radio" id="efectivo" name="payment" value="efectivo">
+                <label for="efectivo">Efectivo</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="tarjeta" name="payment" value="tarjeta" checked>
+                <label for="tarjeta">Tarjeta de débito/crédito</label>
+            </div>
+        </div>
+
+        <div class="card delivery-address">
+            <h2 class="card-title">Dirección de entrega</h2>
+            <div class="form-group">
+                <input type="text" placeholder="Calle">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="N° de casa/apartamento">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Barrio">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Información adicional">
+            </div>
+        </div>
+
+        <div class="card billing-details">
+            <h2 class="card-title">Detalles de facturación</h2>
+            <div class="form-group">
+                <input type="text" placeholder="Nombre de la tarjeta">
+            </div>
+            <div class="form-group">
+                <input type="number" placeholder="Número de la tarjeta">
+            </div>
+            <div class="form-row">
+                <input type="text" placeholder="Fecha de vencimiento">
+                <input type="text" placeholder="CVV">
+            </div>
+        </div>
+
+        <div class="card order-summary">
+            <div class="summary-item">
+                <span>Subtotal</span>
+                <span></span>
+            </div>
+            <div class="summary-item">
+                <span>Envío</span>
+                <span></span>
+            </div>
+            <div class="summary-item">
+                <span>Impuestos</span>
+                <span></span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-total">
+                <span>Total</span>
+                <span></span>
+            </div>
+            <button class="pay-button"><a href="ordered.html">Pagar Ahora</a></button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Minimarket - Mi Perfil</title>
+</head>
+<body class="perfil-body">
+
+    <div class="perfil-container">
+
+        <div id="vista-info">
+            <div class="perfil-header">
+                <div class="perfil-avatar">👤</div>
+                <div>
+                    <h1 id="display-nombre">Nombre Apellido</h1>
+                    <p id="display-rol">cliente</p>
+                </div>
+            </div>
+
+            <div class="perfil-info">
+                <div class="info-item">
+                    <span class="info-label">Correo</span>
+                    <span class="info-value" id="display-email">correo@mail.com</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Teléfono</span>
+                    <span class="info-value" id="display-telefono">—</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Dirección</span>
+                    <span class="info-value" id="display-direccion">—</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Miembro desde</span>
+                    <span class="info-value" id="display-fecha">—</span>
+                </div>
+            </div>
+
+            <div class="perfil-botones">
+                <button class="btn-editar" onclick="mostrarFormulario()">✏️ Editar perfil</button>
+                <button class="btn-eliminar" onclick="eliminarCuenta()">🗑️ Eliminar cuenta</button>
+            </div>
+        </div>
+
+        <div id="vista-formulario" style="display: none;">
+            <h1>Editar perfil</h1>
+
+            <div class="sfna">
+                <div class="sfn">
+                    <label for="nombre">Nombre</label>
+                    <input id="edit-nombre" type="text" placeholder="Jose">
+                </div>
+                <div class="sfa">
+                    <label for="apellido">Apellido</label>
+                    <input id="edit-apellido" type="text" placeholder="Perez">
+                </div>
+            </div>
+
+            <label for="edit-telefono">Teléfono</label>
+            <input id="edit-telefono" type="text" placeholder="3001234567">
+
+            <label for="edit-direccion">Dirección</label>
+            <input id="edit-direccion" type="text" placeholder="Calle 123 #45-67">
+
+            <div class="perfil-botones">
+                <button class="btn-editar" onclick="guardarCambios()">💾 Guardar cambios</button>
+                <button class="btn-cancelar" onclick="cancelarEdicion()">✕ Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="./js/scripts.js"></script>
+</body>
+</html>

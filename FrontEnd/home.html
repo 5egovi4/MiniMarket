@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniMarket - Inicio</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="home-body">
+    <header class="home-header">
+        <div class="header-top">
+            <div class="logo">
+                <img src="./img/logo-horinzontal.png" class="logo-icon">
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar en MiniMarket">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="user-section">
+                <button class="user-button">
+                    <span>👤</span>
+                    <a href="user.html">Usuario</a>
+                    <span>▼</span>
+                </button>
+                <button class="cart-button">
+                    <span>🛒</span>
+                    <a href="car.html">Carrito</a>
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-categories">
+            <button class="nav-button">Oferta del día</button>
+            <button class="nav-button">Limpieza</button>
+            <button class="nav-button">Aseo Personal</button>
+            <button class="nav-button">Alimentos</button>
+            <button class="nav-button">Bebidas</button>
+            <button class="nav-button">Dulces</button>
+        </nav>
+    </header>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <button onclick="anterior()" class="carousel-arrow prev" aria-label="Anterior">‹</button>
+            <img id="carrusel" src="./img/publicidad1.jpg" class="carousel-placeholder">
+            <button onclick="siguiente()" class="carousel-arrow next" aria-label="Siguiente">›</button>
+        </div>
+    </div>
+
+    <section class="products-section">
+        <div class="section-header">
+            <span class="section-icon">🌿</span>
+            <h2 class="section-title">Productos destacados</h2>
+        </div>
+
+        <div class="products-carousel">
+            <button class="products-arrow prev" aria-label="Anterior">‹</button>
+            <button class="products-arrow next" aria-label="Siguiente">›</button>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./img/clorox.jpg"  class="product-placeholder">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-price">Precio</div>
+                        <div class="product-name">Producto</div>
+                    </div>
+                    <button class="add-button">Agregar</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Tratamiento de Datos</a>
+                <a href="#" class="footer-link">Términos y Condiciones</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="TikTok"></a>
+                <a href="#" class="social-icon" aria-label="Instagram"></a>
+                <a href="#" class="social-icon" aria-label="Facebook"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="./js/scripts.js"></script>
+</body>
+</html>

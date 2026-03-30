@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Django
+BackEnd/minimarket/minimarket/settings.py
+BackEnd/minimarket/db.sqlite3
+
+# PostgreSQL
+BackEnd/logfile
+
+# Archivos temporales
+*.zip
+FrontEnd/home1.html
+FrontEnd/login1.html
+FrontEnd/payment1.html

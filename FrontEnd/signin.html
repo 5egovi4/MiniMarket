@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Minimarket</title>
+</head>
+<body class="signin-body">
+
+    <div class="signin-container">
+
+        <div class="formulario">
+            <h1>Crea una cuenta</h1>
+
+            <form>
+                <div class="sfn">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" placeholder="Jose">
+                </div>
+                <div class="sfa">
+                    <label for="apellido">Apellido</label>
+                    <input id="apellido" type="text" placeholder="Perez">
+                </div>
+
+                <label for="correo">Correo</label>
+                <input id="correo" type="email" placeholder="tumail@mail.com">
+                <label for="contraseña">Contraseña</label>
+                <input id="contraseña" type="password" placeholder="XXXXXXXX">
+                <label for="confirmar-contraseña">Confirmar contraseña</label>
+                <input id="confirmar-contraseña" type="password" placeholder="XXXXXXXX">
+            </form>
+
+            <div class="button">
+                <button onclick="registrarUsuario()" type="submit"> Crear cuenta
+                    
+
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/scripts.js"></script>
+</body>
+</html>
