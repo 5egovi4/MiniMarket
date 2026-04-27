@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.contrib.auth.hashers import make_password, check_password
 from .models import Usuario
 from .serializers import UsuarioSerializer
 from datetime import date
@@ -9,6 +10,7 @@ from datetime import date
 def registrar_usuario(request):
     data = request.data.copy()
     data['fecha_registro'] = date.today()
+    data['contraseña'] = make_password(data['contraseña']) 
     serializer = UsuarioSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
@@ -28,14 +30,11 @@ def login_usuario(request):
     except Usuario.DoesNotExist:
         return Response({'error': 'Credenciales incorrectas'}, status=status.HTTP_401_UNAUTHORIZED)
 
-    if usuario.contraseña != contraseña:
+    if not check_password(contraseña, usuario.contraseña):  # ← verifica aquí
         return Response({'error': 'Credenciales incorrectas'}, status=status.HTTP_401_UNAUTHORIZED)
 
     serializer = UsuarioSerializer(usuario)
-    return Response({
-        'mensaje': 'Login exitoso',
-        'usuario': serializer.data
-    })
+    return Response({'mensaje': 'Login exitoso', 'usuario': serializer.data})
 
 @api_view(['GET'])
 def obtener_usuario(request, id):
