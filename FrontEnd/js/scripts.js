@@ -168,4 +168,34 @@ function cerrarCarrito() {
     document.body.style.overflow = ''
 }
 
+async function cargarProductosHome() {
+    const res = await fetch('http://127.0.0.1:8000/api/productos/listar/')
+    const productos = await res.json()
+
+    const grid = document.querySelector('.products-grid')
+    if (!grid) return
+
+    if (productos.length === 0) {
+        grid.innerHTML = '<p style="padding:1rem">No hay productos disponibles</p>'
+        return
+    }
+
+    grid.innerHTML = productos.map(p => `
+        <div class="product-card">
+            <div class="product-image">
+                ${p.foto
+                    ? `<img src="http://127.0.0.1:8000${p.foto}" class="product-placeholder">`
+                    : `<span style="font-size:3rem">🛒</span>`
+                }
+            </div>
+            <div class="product-info">
+                <div class="product-price">$${parseFloat(p.precio).toLocaleString('es-CO')}</div>
+                <div class="product-name">${p.nombre}</div>
+            </div>
+            <button class="add-button">Agregar</button>
+        </div>
+    `).join('')
+}
+
+cargarProductosHome()
 
