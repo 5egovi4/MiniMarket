@@ -24,9 +24,9 @@
                     <a href="user.html">Usuario</a>
                     <span>▼</span>
                 </button>
-                <button class="cart-button">
+                <button class="cart-button" onclick="abrirCarrito()">
                     <span>🛒</span>
-                    <a href="car.html">Carrito</a>
+                    Carrito
                 </button>
             </div>
         </div>
@@ -74,6 +74,43 @@
             </div>
         </div>
     </section>
+
+        <!-- OVERLAY -->
+    <div id="cart-overlay" class="cart-overlay" onclick="cerrarCarrito()"></div>
+
+    <!-- CARRITO DRAWER -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Tu carrito 🛒</h2>
+            <button class="cart-close" onclick="cerrarCarrito()">✕</button>
+        </div>
+
+        <div class="cart-drawer-items" id="cart-drawer-items">
+            <!-- items dinámicos aquí -->
+            <div class="cart-empty">
+                <span>🛒</span>
+                <p>Tu carrito está vacío</p>
+            </div>
+        </div>
+
+        <div class="cart-drawer-summary">
+            <div class="summary-row">
+                <span>Productos</span>
+                <span id="cart-cantidad">0</span>
+            </div>
+            <div class="summary-row">
+                <span>Total impuestos</span>
+                <span id="cart-impuestos">$0</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="cart-total">$0</span>
+            </div>
+            <button class="pay-button" onclick="window.location.href='payment.html'">
+                Pagar
+            </button>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="footer-content">

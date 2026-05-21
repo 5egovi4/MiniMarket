@@ -155,3 +155,17 @@ async function eliminarCuenta() {
 }
 
 cargarPerfil()
+
+function abrirCarrito() {
+    document.getElementById('cart-drawer').classList.add('active')
+    document.getElementById('cart-overlay').classList.add('active')
+    document.body.style.overflow = 'hidden'
+}
+
+function cerrarCarrito() {
+    document.getElementById('cart-drawer').classList.remove('active')
+    document.getElementById('cart-overlay').classList.remove('active')
+    document.body.style.overflow = ''
+}
+
+
