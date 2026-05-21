@@ -13,7 +13,7 @@ function mostrarSeccion(nombre) {
 
 // Cargar inventario 
 async function cargarProductos() {
-    const res = await fetch(`${API}/listar/`)
+    const res = await fetch('http://127.0.0.1:8000/api/productos/listar/')
     const productos = await res.json()
     const grid = document.getElementById('lista-productos')
     const total = document.getElementById('total-productos')
@@ -29,7 +29,7 @@ async function cargarProductos() {
         <div class="prod-card">
             <div class="prod-img-wrap">
                 ${p.foto
-                    ? `<img src="${p.foto}" alt="${p.nombre}" onerror="this.style.display='none'">`
+                    ? `<img src="http://127.0.0.1:8000${p.foto}" alt="${p.nombre}" onerror="this.style.display='none'">`
                     : `<span class="prod-no-img">🛒</span>`
                 }
             </div>
