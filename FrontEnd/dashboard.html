@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Minimarket - Dashboard</title>
+</head>
+<body class="dashboard-body">
+
+    <aside class="dashboard-sidebar">
+        <div class="sidebar-logo">
+            <img src="./img/logo-horinzontal.png" alt="Minimarket" class="sidebar-logo-img">
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn active" onclick="mostrarSeccion('inventario')">
+                <span>📦</span> Inventario
+            </button>
+            <button class="sidebar-btn" onclick="mostrarSeccion('agregar')">
+                <span>➕</span> Agregar producto
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="sidebar-logout" onclick="cerrarSesion()">
+                <span>🚪</span> Cerrar sesión
+            </button>
+        </div>
+    </aside>
+
+    <main class="dashboard-main">
+
+        <section id="seccion-inventario" class="dashboard-section">
+            <div class="section-top">
+                <h1>Inventario</h1>
+                <span id="total-productos" class="badge">0 productos</span>
+            </div>
+
+            <div id="lista-productos" class="productos-grid">
+            
+            </div>
+        </section>
+
+        <section id="seccion-agregar" class="dashboard-section" style="display:none;">
+            <div class="section-top">
+                <h1 id="form-titulo">Agregar producto</h1>
+            </div>
+
+            <div class="producto-form-card">
+                <input type="hidden" id="producto-id">
+
+                <div class="form-field">
+                    <label for="prod-nombre">Nombre del producto</label>
+                    <input id="prod-nombre" type="text" placeholder="Ej: Clorox 500ml">
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-field">
+                        <label for="prod-precio">Precio</label>
+                        <input id="prod-precio" type="number" placeholder="0.00" min="0" step="0.01">
+                    </div>
+                    <div class="form-field">
+                        <label for="prod-stock">Stock</label>
+                        <input id="prod-stock" type="number" placeholder="0" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="prod-foto">URL de la foto</label>
+                    <input id="prod-foto" type="file" accept="image/*">
+                </div>
+
+                <div class="form-preview" id="foto-preview" style="display:none;">
+                    <img id="preview-img" src="" alt="Vista previa">
+                </div>
+
+                <div class="form-botones">
+                    <button class="btn-guardar" onclick="guardarProducto()">💾 Guardar producto</button>
+                    <button class="btn-cancelar-form" onclick="cancelarForm()">✕ Cancelar</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="modal-eliminar" class="modal-overlay" style="display:none;">
+        <div class="modal-card">
+            <p>¿Seguro que deseas eliminar este producto?</p>
+            <p class="modal-nombre" id="modal-nombre-producto"></p>
+            <div class="modal-botones">
+                <button class="btn-eliminar" onclick="confirmarEliminar()">Eliminar</button>
+                <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+
+    <script src="./js/dashboard.js"></script>
+</body>
+</html>
