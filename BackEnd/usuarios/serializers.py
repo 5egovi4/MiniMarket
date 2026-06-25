@@ -8,3 +8,4 @@ class UsuarioSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'contraseña': {'write_only': True}
         }
+

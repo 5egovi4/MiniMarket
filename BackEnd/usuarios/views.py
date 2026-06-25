@@ -30,7 +30,7 @@ def login_usuario(request):
     except Usuario.DoesNotExist:
         return Response({'error': 'Credenciales incorrectas'}, status=status.HTTP_401_UNAUTHORIZED)
 
-    if not check_password(contraseña, usuario.contraseña):  # ← verifica aquí
+    if not check_password(contraseña, usuario.contraseña):  
         return Response({'error': 'Credenciales incorrectas'}, status=status.HTTP_401_UNAUTHORIZED)
 
     serializer = UsuarioSerializer(usuario)

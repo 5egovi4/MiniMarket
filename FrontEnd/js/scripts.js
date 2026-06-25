@@ -43,7 +43,7 @@ async function registrarUsuario() {
         return
     }
 
-    const response = await fetch('http://127.0.0.1:8000/api/usuarios/registrar/', {
+    const response = await fetch(`http://127.0.0.1:8000/api/usuarios/registrar/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -69,7 +69,7 @@ async function iniciarSesion() {
     const email = document.getElementById('userId').value
     const contraseña = document.getElementById('password').value
 
-    const response = await fetch('http://127.0.0.1:8000/api/usuarios/login/', {
+    const response = await fetch(`http://127.0.0.1:8000/api/usuarios/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -160,6 +160,7 @@ function abrirCarrito() {
     document.getElementById('cart-drawer').classList.add('active')
     document.getElementById('cart-overlay').classList.add('active')
     document.body.style.overflow = 'hidden'
+    cargarProductosCarrito()
 }
 
 function cerrarCarrito() {
@@ -167,6 +168,28 @@ function cerrarCarrito() {
     document.getElementById('cart-overlay').classList.remove('active')
     document.body.style.overflow = ''
 }
+
+async function agregarAlCarrito(id_producto) {
+    console.log('id_producto que se manda:', id_producto)
+    const response = await fetch(`http://127.0.0.1:8000/api/carrito/agregar_producto/`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            id_usuario: localStorage.getItem('usuarioId'), 
+            id_producto_id: id_producto,
+            cantidad: 1 
+        })}
+    )
+    
+    const producto = await response.json()
+    console.log(producto)
+    if (response.ok) {
+        alert('Producto agregado al carrito') 
+    } else {
+        alert("Error al agregar el producto")
+    }
+}
+
 
 async function cargarProductosHome() {
     const res = await fetch('http://127.0.0.1:8000/api/productos/listar/')
@@ -192,10 +215,37 @@ async function cargarProductosHome() {
                 <div class="product-price">$${parseFloat(p.precio).toLocaleString('es-CO')}</div>
                 <div class="product-name">${p.nombre}</div>
             </div>
-            <button class="add-button">Agregar</button>
+            <button class="add-button" onclick="agregarAlCarrito(${p.id_producto})">Agregar</button>
         </div>
     `).join('')
 }
 
 cargarProductosHome()
 
+async function cargarProductosCarrito() {
+    const res = await fetch(`http://127.0.0.1:8000/api/carrito/${usuarioId}/ver_carrito/`)
+    const productos = await res.json()
+
+    const grid = document.querySelector('.cart-drawer-items')
+
+    if (productos.length === 0) {
+        grid.innerHTML = `
+        <div class="cart-empty"> 
+            <span>🛒</span> 
+            <p>Tu carrito está vacío</p> 
+        </div>`
+        return
+    }
+
+    grid.innerHTML = productos.map( p => `
+        <div class="cart-drawer-item">
+            <img src="${`http://127.0.0.1:8000${p.id_producto.foto}`}">
+            <div class="cart-item-info">
+                <div class="item-title">${p.id_producto.nombre}</div>
+                <div class="item-price">${p.id_producto.precio}</div>
+            </div>
+            <div class="item-price">Cantidad: ${p.cantidad}</div>
+        </div>
+        
+        `).join('')
+}

@@ -432,6 +432,10 @@ a {
     color: var(--white);
     padding: 2rem;
     margin-top: 3rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-bottom: -2rem;
+    border-radius: 32px 32px 0 0;
     box-shadow: 0 -8px 32px var(--shadow-medium);
 }
 
@@ -631,6 +635,9 @@ a {
     height: 100vh;
     background-color: #FCF7E8;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .container-login {
@@ -642,6 +649,7 @@ a {
     box-shadow: -8px 6px 20px #0000003B;
     border-radius: 30px;
 }
+
 
 .cuadrado-login {
     display: flex;
