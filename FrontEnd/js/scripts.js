@@ -170,7 +170,7 @@ function cerrarCarrito() {
 }
 
 async function agregarAlCarrito(id_producto) {
-    console.log('id_producto que se manda:', id_producto)
+    
     const response = await fetch(`http://127.0.0.1:8000/api/carrito/agregar_producto/`, {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
