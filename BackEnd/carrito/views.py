@@ -64,6 +64,9 @@ def eliminar_producto(request, id_usuario, id_producto):
 
 @api_view(['DELETE'])
 def vaciar_carrito(request, id_usuario):
-    productos = Carrito.objects.filter(id_usuario=id_usuario)
-    productos.delete()
+    carrito = Carrito.objects.filter(id_usuario=id_usuario)
+    if not carrito.exists():
+        return Response({'Mensaje':'El usuario no tiene productos en el carrito'}, status=status.HTTP_404_NOT_FOUND)
+    
+    carrito.delete()
     return Response({'Mensaje':'Carrito vaciado'}, status=status.HTTP_200_OK)
