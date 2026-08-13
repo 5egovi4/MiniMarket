@@ -940,6 +940,20 @@ input::placeholder {
     color: white;
 }
 
+#card-element {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--cream-dark);
+    border-radius: 12px;
+    background: var(--cream);
+    margin-bottom: 0.5rem;
+}
+
+#card-errors {
+    color: #c0392b;
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+}
+
 /* Ordered Styles */
 .ordered-body {
     background: linear-gradient(135deg, #a4b369 0%, #9ca961 100%);

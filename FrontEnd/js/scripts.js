@@ -264,3 +264,98 @@ async function obtenerTotal() {
         document.getElementById('cart-total').textContent = `$${parseFloat(data.total).toLocaleString('es-CO')}`
     }
 }
+
+const STRIPE_PUBLIC_KEY = 'pk_test_51TncMABfmb8di2ORjs1HzYgKfGIqo5fYWBm4k4jRlaA18JCRL6WFvdLXZYg8nNHx1kejAcR12KUKovRUJxagHyqg00ZQLFoHkD'
+let stripe, cardElement
+
+async function iniciarPago() {
+    const usuarioId = localStorage.getItem('usuarioId')
+
+    // Cargar el total
+    const res = await fetch(`http://127.0.0.1:8000/api/carrito/${usuarioId}/total/`)
+    const data = await res.json()
+    const total = parseFloat(data.total).toLocaleString('es-CO')
+    document.getElementById('display-subtotal').textContent = `$${total}`
+    document.getElementById('display-total').textContent = `$${total}`
+
+    // Montar el formulario de Stripe
+    stripe = Stripe(STRIPE_PUBLIC_KEY)
+    const elements = stripe.elements({ locale: 'es' })
+    cardElement = elements.create('card', {
+        style: {
+            base: {
+                fontSize: '16px',
+                fontFamily: 'Calibri, sans-serif',
+                color: '#212121',
+            }
+        }
+    })
+    cardElement.mount('#card-element')
+}
+
+async function procesarPago() {
+    const usuarioId = localStorage.getItem('usuarioId')
+    const btnPagar = document.getElementById('btn-pagar')
+    const errorGeneral = document.getElementById('card-errors-general')
+
+    // Construir dirección
+    const calle = document.getElementById('dir-calle').value
+    const numero = document.getElementById('dir-numero').value
+    const barrio = document.getElementById('dir-barrio').value
+    const adicional = document.getElementById('dir-adicional').value
+
+    if (!calle || !numero || !barrio) {
+        errorGeneral.textContent = 'Por favor completa los campos de dirección obligatorios.'
+        return
+    }
+
+    const direccion = `${calle} ${numero}, ${barrio}${adicional ? ', ' + adicional : ''}`
+
+    // Verificar método de pago
+    const metodoPago = document.querySelector('input[name="payment"]:checked').value
+
+    if (metodoPago === 'efectivo') {
+        window.location.href = '/FrontEnd/ordered.html'
+        return
+    }
+
+    btnPagar.disabled = true
+    btnPagar.textContent = 'Procesando...'
+    errorGeneral.textContent = ''
+
+    // Crear Payment Intent en el backend
+    const res = await fetch('http://127.0.0.1:8000/api/pago/crear-intent/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            id_usuario: parseInt(usuarioId),
+            direccion_envio: direccion,
+        })
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+        errorGeneral.textContent = data.error || 'Error al iniciar el pago.'
+        btnPagar.disabled = false
+        btnPagar.textContent = 'Pagar Ahora'
+        return
+    }
+
+    // Confirmar el pago con Stripe
+    const resultado = await stripe.confirmCardPayment(data.client_secret, {
+        payment_method: { card: cardElement }
+    })
+
+    if (resultado.error) {
+        document.getElementById('card-errors').textContent = resultado.error.message
+        btnPagar.disabled = false
+        btnPagar.textContent = 'Pagar Ahora'
+    } else {
+        window.location.href = '/FrontEnd/ordered.html'
+    }
+}
+
+if (document.getElementById('card-element')) {
+    iniciarPago()
+}
