@@ -83,7 +83,12 @@ async function iniciarSesion() {
     if (response.ok) {
       localStorage.setItem('usuarioId', data.usuario.id_usuario)
     alert('Bienvenido ' + data.usuario.nombre)
-    window.location.href = 'home.html'    } else {
+        if (data.usuario.rol === 'admin') {
+            window.location.href = 'dashboard.html'
+        } else {
+                window.location.href = 'home.html'
+        }    
+    } else {
     alert('Credenciales incorrectas')
     }
 }
@@ -248,4 +253,14 @@ async function cargarProductosCarrito() {
         </div>
         
         `).join('')
+    await obtenerTotal()
+}
+
+async function obtenerTotal() {
+    const usuarioId = localStorage.getItem('usuarioId')
+    const res = await fetch(`http://127.0.0.1:8000/api/carrito/${usuarioId}/total/`)
+    const data = await res.json()
+    if (res.ok) {
+        document.getElementById('cart-total').textContent = `$${parseFloat(data.total).toLocaleString('es-CO')}`
+    }
 }

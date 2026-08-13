@@ -5,6 +5,7 @@ from .models import Carrito
 from usuarios import models as usuario_model 
 from productos import models as producto_model
 from .serializers import CarritoSerializer
+from pagos.utils import calcular_total
 
 @api_view(['POST'])
 def agregar_producto(request):
@@ -70,3 +71,12 @@ def vaciar_carrito(request, id_usuario):
     
     carrito.delete()
     return Response({'Mensaje':'Carrito vaciado'}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def obtener_total(request, id_usuario):
+    try:
+        usuario = usuario_model.Usuario.objects.get(pk=id_usuario)
+    except usuario_model.Usuario.DoesNotExist:
+        return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+    total = calcular_total(id_usuario)
+    return Response({'total': total})
