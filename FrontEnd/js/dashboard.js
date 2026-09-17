@@ -1,4 +1,4 @@
-const API = 'http://127.0.0.1:8000/api/productos'
+const API = 'https://minimarket-x8sf.onrender.com/api/productos'
 let productoAEliminar = null
 
 // Navegación 
@@ -13,7 +13,7 @@ function mostrarSeccion(nombre) {
 
 // Cargar inventario 
 async function cargarProductos() {
-    const res = await fetch('http://127.0.0.1:8000/api/productos/listar/')
+    const res = await fetch('https://minimarket-x8sf.onrender.com/api/productos/listar/')
     const productos = await res.json()
     const grid = document.getElementById('lista-productos')
     const total = document.getElementById('total-productos')
@@ -29,7 +29,7 @@ async function cargarProductos() {
         <div class="prod-card">
             <div class="prod-img-wrap">
                 ${p.foto
-                    ? `<img src="http://127.0.0.1:8000${p.foto}" alt="${p.nombre}" onerror="this.style.display='none'">`
+                    ? `<img src="https://minimarket-x8sf.onrender.com${p.foto}" alt="${p.nombre}" onerror="this.style.display='none'">`
                     : `<span class="prod-no-img">🛒</span>`
                 }
             </div>
@@ -138,11 +138,20 @@ function mostrarSeccionDirecta(nombre) {
 
 // Preview de foto en tiempo real
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('prod-foto').addEventListener('input', function() {
+    document.getElementById('prod-foto').addEventListener('change', function() {
         const preview = document.getElementById('foto-preview')
         const img = document.getElementById('preview-img')
-        if (this.value) {
-            img.src = this.value
+        const file = this.files[0]
+
+        if (file) {
+            // Revocar la URL anterior si existía, para no dejar basura en memoria
+            if (img.dataset.objectUrl) {
+                URL.revokeObjectURL(img.dataset.objectUrl)
+            }
+
+            const objectUrl = URL.createObjectURL(file)
+            img.src = objectUrl
+            img.dataset.objectUrl = objectUrl
             preview.style.display = 'block'
         } else {
             preview.style.display = 'none'

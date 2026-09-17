@@ -43,7 +43,7 @@ async function registrarUsuario() {
         return
     }
 
-    const response = await fetch(`http://127.0.0.1:8000/api/usuarios/registrar/`, {
+    const response = await fetch(`https://minimarket-x8sf.onrender.com/api/usuarios/registrar/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -69,7 +69,7 @@ async function iniciarSesion() {
     const email = document.getElementById('userId').value
     const contraseña = document.getElementById('password').value
 
-    const response = await fetch(`http://127.0.0.1:8000/api/usuarios/login/`, {
+    const response = await fetch(`https://minimarket-x8sf.onrender.com/api/usuarios/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -96,7 +96,7 @@ async function iniciarSesion() {
 const usuarioId = localStorage.getItem('usuarioId') || 1
 
 async function cargarPerfil() {
-    const response = await fetch(`http://127.0.0.1:8000/api/usuarios/${usuarioId}/`)
+    const response = await fetch(`https://minimarket-x8sf.onrender.com/api/usuarios/${usuarioId}/`)
     const usuario = await response.json()
 
     document.getElementById('display-nombre').textContent = `${usuario.nombre} ${usuario.apellido}`
@@ -123,7 +123,7 @@ function cancelarEdicion() {
 }
 
 async function guardarCambios() {
-    const response = await fetch(`http://127.0.0.1:8000/api/usuarios/${usuarioId}/actualizar/`, {
+    const response = await fetch(`https://minimarket-x8sf.onrender.com/api/usuarios/${usuarioId}/actualizar/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -147,7 +147,7 @@ async function eliminarCuenta() {
     const confirmar = confirm('¿Estás seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')
     if (!confirmar) return
 
-    const response = await fetch(`http://127.0.0.1:8000/api/usuarios/${usuarioId}/eliminar/`, {
+    const response = await fetch(`https://minimarket-x8sf.onrender.com/api/usuarios/${usuarioId}/eliminar/`, {
         method: 'DELETE'
     })
 
@@ -176,7 +176,7 @@ function cerrarCarrito() {
 
 async function agregarAlCarrito(id_producto) {
     
-    const response = await fetch(`http://127.0.0.1:8000/api/carrito/agregar_producto/`, {
+    const response = await fetch(`https://minimarket-x8sf.onrender.com/api/carrito/agregar_producto/`, {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
@@ -197,7 +197,7 @@ async function agregarAlCarrito(id_producto) {
 
 
 async function cargarProductosHome() {
-    const res = await fetch('http://127.0.0.1:8000/api/productos/listar/')
+    const res = await fetch('https://minimarket-x8sf.onrender.com/api/productos/listar/')
     const productos = await res.json()
 
     const grid = document.querySelector('.products-grid')
@@ -212,7 +212,7 @@ async function cargarProductosHome() {
         <div class="product-card">
             <div class="product-image">
                 ${p.foto
-                    ? `<img src="http://127.0.0.1:8000${p.foto}" class="product-placeholder">`
+                    ? `<img src="https://minimarket-x8sf.onrender.com${p.foto}" class="product-placeholder">`
                     : `<span style="font-size:3rem">🛒</span>`
                 }
             </div>
@@ -228,7 +228,7 @@ async function cargarProductosHome() {
 cargarProductosHome()
 
 async function cargarProductosCarrito() {
-    const res = await fetch(`http://127.0.0.1:8000/api/carrito/${usuarioId}/ver_carrito/`)
+    const res = await fetch(`https://minimarket-x8sf.onrender.com/api/carrito/${usuarioId}/ver_carrito/`)
     const productos = await res.json()
 
     const grid = document.querySelector('.cart-drawer-items')
@@ -244,7 +244,7 @@ async function cargarProductosCarrito() {
 
     grid.innerHTML = productos.map( p => `
         <div class="cart-drawer-item">
-            <img src="${`http://127.0.0.1:8000${p.id_producto.foto}`}">
+            <img src="${`https://minimarket-x8sf.onrender.com${p.id_producto.foto}`}">
             <div class="cart-item-info">
                 <div class="item-title">${p.id_producto.nombre}</div>
                 <div class="item-price">${p.id_producto.precio}</div>
@@ -258,7 +258,7 @@ async function cargarProductosCarrito() {
 
 async function obtenerTotal() {
     const usuarioId = localStorage.getItem('usuarioId')
-    const res = await fetch(`http://127.0.0.1:8000/api/carrito/${usuarioId}/total/`)
+    const res = await fetch(`https://minimarket-x8sf.onrender.com/api/carrito/${usuarioId}/total/`)
     const data = await res.json()
     if (res.ok) {
         document.getElementById('cart-total').textContent = `$${parseFloat(data.total).toLocaleString('es-CO')}`
@@ -272,7 +272,7 @@ async function iniciarPago() {
     const usuarioId = localStorage.getItem('usuarioId')
 
     // Cargar el total
-    const res = await fetch(`http://127.0.0.1:8000/api/carrito/${usuarioId}/total/`)
+    const res = await fetch(`https://minimarket-x8sf.onrender.com/api/carrito/${usuarioId}/total/`)
     const data = await res.json()
     const total = parseFloat(data.total).toLocaleString('es-CO')
     document.getElementById('display-subtotal').textContent = `$${total}`
@@ -324,7 +324,7 @@ async function procesarPago() {
     errorGeneral.textContent = ''
 
     // Crear Payment Intent en el backend
-    const res = await fetch('http://127.0.0.1:8000/api/pago/crear-intent/', {
+    const res = await fetch('https://minimarket-x8sf.onrender.com/api/pago/crear-intent/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
