@@ -9,7 +9,6 @@ import os
 from dotenv import load_dotenv
 
 from carrito.models import Carrito
-from pedido.models import Pedido, DetallePedido
 from usuarios.models import Usuario
 from pagos.utils import calcular_total
 
@@ -88,12 +87,6 @@ def stripe_webhook(request):
             )
 
             for item in items:
-                DetallePedido.objects.create(
-                    id_pedido=pedido,
-                    id_producto=item.id_producto,
-                    cantidad=item.cantidad,
-                    precio_unitario=item.id_producto.precio,
-                )
                 # reducir stock
                 producto = item.id_producto
                 producto.stock -= item.cantidad
