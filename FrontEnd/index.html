@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniMarket - Inicio</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="home-body">
+    <header class="home-header">
+        <div class="header-top">
+            <div class="logo">
+                <img src="./img/logo-horinzontal.png" class="logo-icon">
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar en MiniMarket">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="user-section">
+                <button class="user-button">
+                    <span>👤</span>
+                    <a href="user.html">Usuario</a>
+                    <span>▼</span>
+                </button>
+                <button class="cart-button" onclick="abrirCarrito()">
+                    <span>🛒</span>
+                    Carrito
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-categories">
+            <button class="nav-button">Oferta del día</button>
+            <button class="nav-button">Limpieza</button>
+            <button class="nav-button">Aseo Personal</button>
+            <button class="nav-button">Alimentos</button>
+            <button class="nav-button">Bebidas</button>
+            <button class="nav-button">Dulces</button>
+        </nav>
+    </header>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <button onclick="anterior()" class="carousel-arrow prev" aria-label="Anterior">‹</button>
+            <img id="carrusel" src="./img/publicidad1.jpg" class="carousel-placeholder">
+            <button onclick="siguiente()" class="carousel-arrow next" aria-label="Siguiente">›</button>
+        </div>
+    </div>
+
+    <section class="products-section">
+        <div class="section-header">
+            <span class="section-icon">🌿</span>
+            <h2 class="section-title">Productos destacados</h2>
+        </div>
+
+        <div class="products-carousel">
+            <button class="products-arrow prev" aria-label="Anterior">‹</button>
+            <button class="products-arrow next" aria-label="Siguiente">›</button>
+            
+            <div class="products-grid">
+
+            </div>
+        </div>
+    </section>
+
+    <div id="cart-overlay" class="cart-overlay" onclick="cerrarCarrito()"></div>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h2>Tu carrito 🛒</h2>
+            <button class="cart-close" onclick="cerrarCarrito()">✕</button>
+        </div>
+
+        <div class="cart-drawer-items" id="cart-drawer-items">
+        </div>
+
+        <div class="cart-drawer-summary">
+            <div class="summary-row">
+                <span>Productos</span>
+                <span id="cart-cantidad">0</span>
+            </div>
+            <div class="summary-row">
+                <span>Total impuestos</span>
+                <span id="cart-impuestos">$0</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="cart-total">$0</span>
+            </div>
+            <button class="pay-button" onclick="window.location.href='payment.html'">
+                Pagar
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Tratamiento de Datos</a>
+                <a href="#" class="footer-link">Términos y Condiciones</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="TikTok"></a>
+                <a href="#" class="social-icon" aria-label="Instagram"></a>
+                <a href="#" class="social-icon" aria-label="Facebook"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="./js/scripts.js"></script>
+</body>
+</html>
